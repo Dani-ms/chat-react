@@ -11,3 +11,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.send-message{
+  background-color:#5ea3d0;
+  color:#FFF;
+  border-radius: 8px;
+  height: 38px;
+  width: 60px;
+}

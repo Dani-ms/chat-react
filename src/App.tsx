@@ -1,15 +1,16 @@
 import React from 'react';
-import { Provider } from 'react-redux'
-import Home from './components/home/home';
+import Home from './components/pages/home/home';
 import './App.css';
+
 
 class App extends React.Component{
   render(){
     return(
-      <Provider>
-      <Home/>
-      </Provider>
-    )
+     
+      <div className="App">
+        <Home />
+      </div>
+    );
   }
  
 }
