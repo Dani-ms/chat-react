@@ -1,6 +1,8 @@
 import React from 'react';
-import Home from './components/pages/home/home';
+//import Home from './components/pages/home/home';
 import './App.css';
+import LoginPage from './components/pages/login/login-page';
+//import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 
 class App extends React.Component{
@@ -8,8 +10,13 @@ class App extends React.Component{
     return(
      
       <div className="App">
-        <Home />
+        <div>
+        <LoginPage/>
       </div>
+        
+       
+      </div>
+      
     );
   }
  

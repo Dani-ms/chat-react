@@ -2,9 +2,9 @@ import React from 'react';
 
 import {ChangeEvent, Component} from 'react';
 import { Message } from '../../../logic/messages/types';
-
 import { messageApi } from './../../../logic/messages/message-api';
 import { MessageList } from './components/message-list';
+
 
 
 type State = {
@@ -44,6 +44,7 @@ class Home extends Component<{}, State>{
     render() {
         return (
           <div>
+            
             <h1>Chat Messages</h1>
            
             <div>
@@ -55,7 +56,7 @@ class Home extends Component<{}, State>{
             </div>
             <textarea onChange={this.handleChange} value={this.state.input}/>
             <div>
-              <button onClick={this.handleClick} value="submit" className="send-message">Enviar</button>
+              <button onClick={this.handleClick} value="submit" color="primary">Enviar</button>
             </div>
           </div>
         );
