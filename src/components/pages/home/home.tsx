@@ -4,6 +4,7 @@ import {ChangeEvent, Component} from 'react';
 import { Message } from '../../../logic/messages/types';
 import { messageApi } from './../../../logic/messages/message-api';
 import { MessageList } from './components/message-list';
+import { AppContext } from '../../../logic/app-context';
 
 
 
@@ -12,6 +13,7 @@ type State = {
   input: string,
 }
 class Home extends Component<{}, State>{
+  static contextType = AppContext;
 
     state: State = {
       input: "",
@@ -44,7 +46,7 @@ class Home extends Component<{}, State>{
     render() {
         return (
           <div>
-            
+            <AppContext.Consumer>{this.context}</AppContext.Consumer>
             <h1>Chat Messages</h1>
            
             <div>
@@ -65,4 +67,4 @@ class Home extends Component<{}, State>{
 
 
 
-    export default (Home)
+export default Home

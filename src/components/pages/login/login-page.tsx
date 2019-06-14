@@ -1,27 +1,44 @@
 import React from 'react';
-import {ChangeEvent, Component} from 'react';
-import {BrowserRouter as Router, Route, Link, Redirect} from 'react-router-dom';
-import home from '../home/home';
-//import Button from '@material-ui/core/Button';
+import { ChangeEvent, Component, MouseEvent } from 'react';
+import {Redirect} from 'react-router-dom';
+
+import {AppContext} from './../../../logic/app-context';
+import FormLogin from './components/form-login';
+
+
 
 type Props = {}
-type State = { value: string, redirect:boolean}
+type State = { value: string, username: string}
 
 class LoginPage extends Component<Props,State>{
+    static contextType = AppContext;
     state = {
         value: '',
+        username: '',
         redirect: false
        
     }
-    
-   // handleClick  = () =>{
-  //     this.setState({redirect:true})
-  // };
-    onSubmit = (e:ChangeEvent<HTMLButtonElement>) =>{
-   if(this.state.redirect){
-           return <Redirect to='/home'></Redirect>
-        }
-   }
+
+    constructor(props:Props){
+        super(props);
+
+        this.onUsernameChange = this.onUsernameChange.bind(this);
+        this.onLogin = this.onLogin.bind(this);
+
+     
+    }
+   
+    onUsernameChange = (e:ChangeEvent<HTMLInputElement>) =>{
+        this.setState({username: e.currentTarget.value})
+    }
+
+    onLogin = (e:MouseEvent<HTMLButtonElement>) =>{
+        e.preventDefault();
+       // this.context.session.login(this.state.username)
+      
+    }
+
+  
     onChange = (e:React.ChangeEvent<HTMLInputElement>) =>{
             this.setState({value: e.target.value});
     }
@@ -31,32 +48,20 @@ class LoginPage extends Component<Props,State>{
 
     render(){
       return(
-       <Router>
-           <div className="Login">
-           <h1>Login for Chat</h1>
-        
-        <input type="text" value={this.state.value} onChange={this.onChange} placeholder="nome"></input>
-        
-        <button onSubmit={this.onSubmit} value="submit" color="primary">Entrar</button>
-        
-         <p> <Link to="/home">Home</Link> </p> 
-      
-         
-            
-         
-          
-          
-        
-         <Route exact path="/home" component={home} />
-       
+        this.context.session.token ?
+        <Redirect to="/" /> :
+        <div style={{paddingTop: '30px'}}>
+          {this.context.session.isLoading ? 'Loading' :
+           <FormLogin
+            username={this.state.username}
+            onUsernameChange={this.onUsernameChange}
+            onLogin={this.onLogin}
+          />}
         </div>
-
-            
-       </Router>
         
       );
     }
    
   }
 
-  export default(LoginPage)
+  export default LoginPage
