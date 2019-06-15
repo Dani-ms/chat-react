@@ -33,8 +33,8 @@ class LoginPage extends Component<Props,State>{
     }
 
     onLogin = (e:MouseEvent<HTMLButtonElement>) =>{
-        e.preventDefault();
-       // this.context.session.login(this.state.username)
+       
+       this.context.session.login(this.state.username)
       
     }
 

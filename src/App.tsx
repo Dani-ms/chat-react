@@ -3,17 +3,23 @@ import Home from './components/pages/home/home';
 import './App.css';
 import LoginPage from './components/pages/login/login-page';
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import { AppContext, appInitialState } from './logic/app-context';
-import { Session } from 'inspector';
-
-//import {AppContext} from './logic/app-context'
-
-type Props = {}
-&{session: any }
+import { AppContext} from './logic/app-context';
 
 
-type State = { state: '',session?:[],isLoading:boolean,value:string, username: string}
-class App extends React.Component<Props, State>{
+
+type Props = { }
+
+type State = {
+  session:{
+    isLoading: boolean,
+    token?: string,
+    login: (login:string) => void,
+  }
+}
+
+//type AppContext<T> = { value:<{ session: { isLoading: boolean; token: undefined; }; }>}
+
+class App extends React.Component<Props, State >{
  readonly state: State 
   constructor(props: Props){
     super(props);
@@ -28,7 +34,7 @@ class App extends React.Component<Props, State>{
   }
 
   login = (username:string) =>{
-    fetch('http://localhost:3001/login').then(response => {
+    fetch('http://localhost:3000/home').then(response => {
       if(response.ok){ return response.json()}
       else{ throw new Error()}
       })
@@ -44,20 +50,20 @@ class App extends React.Component<Props, State>{
     return(
      
       <div className="App">
-      
+      <AppContext.Provider value={this.state}>
       <BrowserRouter>
-     <AppContext.Provider value={this.state}>
+     
      
      
       <Switch>
 
       <Route path="/login" exact component={LoginPage}></Route>
-      <Route path="/home" exact component={Home}></Route>
+      <Route path="/" exact component={Home}></Route>
      
       
       </Switch>
-    </AppContext.Provider>
       </BrowserRouter>
+    </AppContext.Provider>
        
       </div>
       
